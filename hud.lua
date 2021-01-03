@@ -13,7 +13,6 @@ while true do
 
   if event == "modem_message" then
     local message = p4
-    
     if message == "Reactor Warning!!!" then
       local text = reactorTextBox.addText({ 5, 5 }, message)
       text.setScale(3)
@@ -29,6 +28,12 @@ while true do
 
     elseif message == "Armor Good"  then
       armorTextBox.clear()
+
+    elseif string.find(message, "Storage", true) then
+      local storageMessage = split(p4, ":")
+
+      if storageMessage[2] == "OakLeaves" then
+        
     end
 
 
