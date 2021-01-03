@@ -6,16 +6,14 @@ local modem =  peripheral.wrap(left)
 local reactorTextBox = canvas.addGroup({ 0, 0 })
 local armorTextBox = canvas.addGroup({0, 30})
 
-if modem.isOpen(2) ~= true then
-  modem.open(2)
-end
+openModem(2, modem)
 
 while true do
   local event, p1, p2, p3, p4, p5, p6 = os.pullEvent()
 
   if event == "modem_message" then
     local message = p4
-
+    
     if message == "Reactor Warning!!!" then
       local text = reactorTextBox.addText({ 5, 5 }, message)
       text.setScale(3)
@@ -32,6 +30,7 @@ while true do
     elseif message == "Armor Good"  then
       armorTextBox.clear()
     end
+
 
   elseif event=="key" then
     local key = p1
