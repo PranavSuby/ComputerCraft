@@ -2,8 +2,8 @@ tArgs = {...}
 
 fileName = tArgs[1]
 
-function get(repoFile,saveTo)
-  local download = http.get("https://raw.github.com/PranavSuby/ComputerCraft".. repoFile) --This will make 'download' hold the contents of the file.
+function get(repoFile, repoFolder, saveTo)
+  local download = http.get("https://raw.githubusercontent.com/PranavSuby/ComputerCraft/master/"..repoFolder.."/"..repoFile) --This will make 'download' hold the contents of the file.
   if download then --checks if download returned true or false
     local handle = download.readAll() --Reads everything in download
     download.close() --remember to close the download!
@@ -11,21 +11,54 @@ function get(repoFile,saveTo)
     file.write(handle) --writes all the stuff in handle to the file defined in 'saveTo'
     file.close() --remember to close the file!
   else --if returned false
-    print("Unable to download the file "..repoFile)
+    print("Unable to download the file "..repoFolder.."/"..repoFile)
     print("Make sure you have the HTTP API enabled or")
     print("an internet connection!")
   end --end the
 end --close the function
 
-
-local files = {"update.lua", "replace.lua", "hud.lua", "lib.lua", "debugHud.lua", "healthHud.lua", "armorAlert.lua"}
-
-filePath = ""
-
-if string.sub(fileName, -4) == ".lua" then
-	filePath = fileName
-else
-	filePath = fileName .. ".lua"
+function doesItExist(list, value)
+  local exists = false
+  for k, v in pairs(list) do
+    if list[k] == value then
+      exists = true
+      break
+    end
+  end
+  return exists
 end
 
-get(filePath, filePath)
+  local files = {
+    ["AllComputers"] = {"update.lua", "lib.lua", "updateBaseFiles.lua", "updateComputerFiles.lua"},
+    ["ArmorChecker"] = {"armorAlert.lua"},
+    ["BaseScreen"] = {"modularMachineryPartsList.lua"},
+    ["NeuralInterface"] = {"debugHud.lua", "healthHud.lua", "hud.lua"},
+    ["StorageChecker"] = {"checkStock.lua"}
+  }
+
+  local keyset = {}
+
+  for k,v in pairs(files) do
+    keyset[#keyset+1] = k
+  end
+
+
+  filePath = ""
+
+  if string.sub(fileName, -4) == ".lua" then
+    filePath = fileName
+  else
+    filePath = fileName .. ".lua"
+  end
+
+  local fileFolder = ""
+
+  for k,v in pairs(keyset) do
+    if doesItExist(files[v], filePath) then
+      fileFolder = v
+      break
+    end
+  end
+
+
+  get(filePath, fileFolder, filePath)
