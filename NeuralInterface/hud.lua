@@ -32,9 +32,6 @@ end
   while true do
     local event, p1, p2, p3, p4, p5, p6 = os.pullEvent()
 
-    group1 = canvas.addGroup({100,100})
-    drawCircle(10, 8, 8, 0xD44646FF, group1)
-
     if event == "modem_message" then
       local message = p4
       if message == "Reactor Warning!!!" then
@@ -55,9 +52,10 @@ end
 
       elseif string.find(message, "Storage", true) then
         local storageMessage = split(p4, ":")
-
+        local storageGroup = canvas.addGroup({490,120})
         if storageMessage[2] == "OakLeaves" then
-
+          drawCircle(10, 0, 0, 0xD44646FF, storageGroup)
+          storageGroup.addItem({8,8}, "minecraft:leaves")
         end
       end
 
