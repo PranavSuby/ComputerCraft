@@ -32,7 +32,7 @@ openModem(2, modem)
 
 while true do
   local event, p1, p2, p3, p4, p5, p6 = os.pullEvent()
-
+  local storageTable = {}
   if event == "modem_message" then
     local message = p4
     if message == "Reactor Warning!!!" then
@@ -52,17 +52,32 @@ while true do
       armorTextBox.clear()
 
     elseif string.find(message, "Storage") then
-      local storageMessage = split(p4, ":")
-      if storageMessage[2] == "OakLeaves" then
-        local color = 0xD44646FF
-        if storageMessage[3] == "Yellow" then
-          color = 0xFFCC00FF
-        end
-        drawCircle(10, 0, 0, color, storageGroup)
-        storageGroup.addItem({-8,-8}, "minecraft:leaves")
+      local storageMessage = split(p4, "-") --Message in the form of "Storage-<itemId>-<color>" Example "Storage-minecraft:leaves-Yellow"
+      local storageItemName = storageMessage[2]
+      local storageColor = storageMessage[3]
+      local colorTable = {
+        ["Yellow"] = 0xFFCC00FF,
+        ["Red"] = 0xD44646FF
+      }
+
+      if storageColor ~= "Green" then
+        storageTable[#storageTable+1] = {storageItemName, colorTable[storageColor]}
+        modem.transmit(1,1,storageItemName.."-"..storageColor)
+      else
+        storageTable.remove(reverseIndex(storageTable)[storageItemName])
+        modem.transmit(1,1,storageItemName.."-"..storageColor)
       end
-    else
-      print(message)
+
+      local sideNum = 3 --How many storage alerts per row/column
+
+      storageGroup.clear()
+      
+      for i=0, #storageTable do
+        local tempGroup[i+1] = storageGroup.addGroup({-16 * math.floor(i/sideNum),16*(i%sidNum)})
+        drawCircle(10, 0, 0, storageTable[i+1][2], storageGroup)
+        storageGroup.addItem({-8,-8}, storageTable[i+1][1])
+      end
+
     end
 
 

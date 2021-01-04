@@ -22,6 +22,18 @@ function split (inputstr, sep)
         return t
 end
 
+function reverseIndex(t)
+  local tReversed = {}
+  for k, v in pairs(t) do
+    tReversed[v] = k
+  end
+  return tReversed
+end
+
+
+
+
+--EVERYTHING BELOW IS FOR THE UPDATE FILES
 files = {
   ["AllComputers"] = {"update.lua", "lib.lua", "updateBaseFiles.lua", "updateComputerFiles.lua"},
   ["ArmorChecker"] = {"armorAlert.lua", "startup.lua"},
