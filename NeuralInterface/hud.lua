@@ -52,6 +52,8 @@ end
 
       elseif string.find(message, "Storage", true) then
         local storageMessage = split(p4, ":")
+        print("test")
+        print(storageMessage[2])
         local storageGroup = canvas.addGroup({490,120})
         if storageMessage[2] == "OakLeaves" then
           drawCircle(10, 0, 0, 0xD44646FF, storageGroup)
