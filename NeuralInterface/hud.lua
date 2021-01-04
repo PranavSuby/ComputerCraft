@@ -24,6 +24,7 @@ function drawCircle(r, x, y, c, g1)
       g1.addDot({ptx, pty}, c)
     end
   end
+end
 
 
   openModem(2, modem)
@@ -33,7 +34,7 @@ function drawCircle(r, x, y, c, g1)
 
     group1 = canvas.addGroup({100,100})
     drawCircle(10, 8, 8, colors.blue, group1)
-    
+
     if event == "modem_message" then
       local message = p4
       if message == "Reactor Warning!!!" then
