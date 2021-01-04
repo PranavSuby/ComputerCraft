@@ -33,7 +33,7 @@ end
     local event, p1, p2, p3, p4, p5, p6 = os.pullEvent()
 
     group1 = canvas.addGroup({100,100})
-    drawCircle(10, 8, 8, colors.blue, group1)
+    drawCircle(10, 8, 8, 0xD44646FF, group1)
 
     if event == "modem_message" then
       local message = p4
@@ -72,6 +72,5 @@ end
       end
 
     end
-
 
   end
