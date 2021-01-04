@@ -1,3 +1,5 @@
+require "lib"
+
 tArgs = {...}
 
 fileName = tArgs[1]
