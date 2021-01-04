@@ -6,6 +6,7 @@ local modem =  peripheral.wrap(left)
 
 local reactorTextBox = canvas.addGroup({ 0, 0 })
 local armorTextBox = canvas.addGroup({0, 30})
+local storageGroup = canvas.addGroup({490,120})
 
 local itemBaseWidth = 16
 local itemBaseHeight = 16
@@ -52,9 +53,9 @@ while true do
 
     elseif string.find(message, "Storage") then
       local storageMessage = split(p4, ":")
-      local storageGroup = canvas.addGroup({490,120})
       if storageMessage[2] == "OakLeaves" then
-        drawCircle(10, 0, 0, 0xD44646FF, storageGroup)
+        print("1")
+        --drawCircle(10, 0, 0, 0xD44646FF, storageGroup)
         storageGroup.addItem({8,8}, "minecraft:leaves")
       end
     else
