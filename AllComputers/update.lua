@@ -40,12 +40,21 @@ end
 
   local fileFolder = ""
 
-  for k,v in pairs(keyset) do
-    if doesItExist(files[v], filePath) then
-      fileFolder = v
-      break
+  if doesItExist(files[os.getComputerLabel()], filePath) then
+    fileFolder =  os.getComputerLabel()
+  else
+
+    for k,v in pairs(keyset) do
+      if doesItExist(files[v], filePath) then
+        fileFolder = v
+        break
+      end
     end
+
   end
 
-
-  get(filePath, fileFolder, filePath)
+  if fileFolder ~= "" then
+    get(filePath, fileFolder, filePath)
+  else
+    print("File Folder Does Not Exist")
+  end
