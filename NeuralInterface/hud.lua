@@ -59,6 +59,8 @@ end
           drawCircle(10, 0, 0, 0xD44646FF, storageGroup)
           storageGroup.addItem({8,8}, "minecraft:leaves")
         end
+      else
+        print(message)
       end
 
 
