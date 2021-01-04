@@ -54,9 +54,12 @@ while true do
     elseif string.find(message, "Storage") then
       local storageMessage = split(p4, ":")
       if storageMessage[2] == "OakLeaves" then
-        print("1")
-        --drawCircle(10, 0, 0, 0xD44646FF, storageGroup)
-        storageGroup.addItem({8,8}, "minecraft:leaves")
+        local color = 0xD44646FF
+        if storageMessage[3] == "Yellow" then
+          color = 0xFFCC00FF
+        end
+        drawCircle(10, 0, 0, color, storageGroup)
+        storageGroup.addItem({-8,-8}, "minecraft:leaves")
       end
     else
       print(message)
