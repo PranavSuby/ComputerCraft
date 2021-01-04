@@ -71,11 +71,11 @@ while true do
       local sideNum = 3 --How many storage alerts per row/column
 
       storageGroup.clear()
-      
+
       for i=0, #storageTable do
-        local tempGroup[i+1] = storageGroup.addGroup({-16 * math.floor(i/sideNum),16*(i%sidNum)})
-        drawCircle(10, 0, 0, storageTable[i+1][2], storageGroup)
-        storageGroup.addItem({-8,-8}, storageTable[i+1][1])
+        local tempGroup = storageGroup.addGroup({-16 * math.floor(i/sideNum),16*(i%sidNum)})
+        drawCircle(10, 0, 0, storageTable[i+1][2], tempGroup)
+        tempGroup.addItem({-8,-8}, storageTable[i+1][1])
       end
 
     end
