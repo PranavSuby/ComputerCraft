@@ -1,1 +1,1 @@
-shell.run(armorAlert)
+shell.openTab("armorAlert")
