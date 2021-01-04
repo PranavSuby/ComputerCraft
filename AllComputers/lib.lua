@@ -24,10 +24,10 @@ end
 
 files = {
   ["AllComputers"] = {"update.lua", "lib.lua", "updateBaseFiles.lua", "updateComputerFiles.lua"},
-  ["ArmorChecker"] = {"armorAlert.lua"},
-  ["BaseScreen"] = {"modularMachineryPartsList.lua"},
-  ["NeuralInterface"] = {"debugHud.lua", "healthHud.lua", "hud.lua"},
-  ["StorageChecker"] = {"checkStock.lua"}
+  ["ArmorChecker"] = {"armorAlert.lua", "startup.lua"},
+  ["BaseScreen"] = {"modularMachineryPartsList.lua", "startup.lua"},
+  ["NeuralInterface"] = {"debugHud.lua", "healthHud.lua", "hud.lua", "clearHud.lua", "startup.lua"},
+  ["StorageChecker"] = {"checkStock.lua", "startup.lua"}
 }
 
 keyset = {}
