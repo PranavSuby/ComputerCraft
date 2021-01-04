@@ -39,7 +39,7 @@ files = {
   ["ArmorChecker"] = {"armorAlert.lua", "startup.lua"},
   ["BaseScreen"] = {"modularMachineryPartsList.lua", "startup.lua"},
   ["NeuralInterface"] = {"debugHud.lua", "healthHud.lua", "hud.lua", "clearHud.lua", "startup.lua"},
-  ["StorageChecker"] = {"checkStock.lua", "startup.lua"}
+  ["StorageChecker"] = {"checkStock.lua", "messageStation.lua", "storageLib.lua", "startup.lua"}
 }
 
 keyset = {}
