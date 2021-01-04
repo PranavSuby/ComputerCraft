@@ -42,11 +42,13 @@ end
 
   if doesItExist(files[os.getComputerLabel()], filePath) then
     fileFolder =  os.getComputerLabel()
+    print("Found in Same Folder: "..fileFolder)
   else
 
     for k,v in pairs(keyset) do
       if doesItExist(files[v], filePath) then
         fileFolder = v
+        print("found in different folder "..tostring(v))
         break
       end
     end
