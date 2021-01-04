@@ -50,7 +50,7 @@ while true do
     elseif message == "Armor Good"  then
       armorTextBox.clear()
 
-    elseif string.find(message, "Storage", true) then
+    elseif string.find(message, "Storage") then
       local storageMessage = split(p4, ":")
       local storageGroup = canvas.addGroup({490,120})
       if storageMessage[2] == "OakLeaves" then
