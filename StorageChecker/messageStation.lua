@@ -43,7 +43,7 @@ while true do
       end
     end
 
-  else if channel == 1 then --Receiving Message from NeuralInterface/hud.lua
+  elseif channel == 1 then --Receiving Message from NeuralInterface/hud.lua
     messageSentTable[message] = True
   end
 end
