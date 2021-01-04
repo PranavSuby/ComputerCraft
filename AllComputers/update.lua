@@ -28,21 +28,6 @@ function doesItExist(list, value)
   return exists
 end
 
-  local files = {
-    ["AllComputers"] = {"update.lua", "lib.lua", "updateBaseFiles.lua", "updateComputerFiles.lua"},
-    ["ArmorChecker"] = {"armorAlert.lua"},
-    ["BaseScreen"] = {"modularMachineryPartsList.lua"},
-    ["NeuralInterface"] = {"debugHud.lua", "healthHud.lua", "hud.lua"},
-    ["StorageChecker"] = {"checkStock.lua"}
-  }
-
-  local keyset = {}
-
-  for k,v in pairs(files) do
-    keyset[#keyset+1] = k
-  end
-
-
   filePath = ""
 
   if string.sub(fileName, -4) == ".lua" then

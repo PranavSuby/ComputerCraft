@@ -21,3 +21,17 @@ function split (inputstr, sep)
         end
         return t
 end
+
+files = {
+  ["AllComputers"] = {"update.lua", "lib.lua", "updateBaseFiles.lua", "updateComputerFiles.lua"},
+  ["ArmorChecker"] = {"armorAlert.lua"},
+  ["BaseScreen"] = {"modularMachineryPartsList.lua"},
+  ["NeuralInterface"] = {"debugHud.lua", "healthHud.lua", "hud.lua"},
+  ["StorageChecker"] = {"checkStock.lua"}
+}
+
+keyset = {}
+
+for k,v in pairs(files) do
+  keyset[#keyset+1] = k
+end
