@@ -66,7 +66,7 @@ while true do
         storageTable[#storageTable+1] = {storageItemName, colorTable[storageColor]}
         modem.transmit(1,1,storageItemName.."-"..storageColor)
       else
-        table.remove(storageTable, reverseStorage()[storageItemName])
+        table.remove(storageTable, reverseStorage[{storageItemName, storageColor}])
         modem.transmit(1,1,storageItemName.."-"..storageColor)
       end
 
