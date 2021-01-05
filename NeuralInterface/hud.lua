@@ -73,10 +73,10 @@ while true do
 
       storageGroup.clear()
 
-      for i=0, #storageTable do
-        local tempGroup = storageGroup.addGroup({-16 * math.floor(i/sideNum),16*(i%sidNum)})
-        drawCircle(10, 0, 0, storageTable[i+1][2], tempGroup)
-        tempGroup.addItem({-8,-8}, storageTable[i+1][1])
+      for i=1, #storageTable do
+        local tempGroup = storageGroup.addGroup({-16 * math.floor((i-1)/sideNum),16*((i-1)%sideNum)})
+        drawCircle(10, 0, 0, colorTable[storageColor], tempGroup)
+        tempGroup.addItem({-8,-8}, storageItemName)
       end
 
     end

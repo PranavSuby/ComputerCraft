@@ -12,10 +12,11 @@ function setItemFalse(itemName) --This function will make the two values False i
 end
 
 for i=1, #drawerTable do
-  messageSentTable[drawerTable[i].getItemMeta(2).name.."-Red"] = False
-  messageSentTable[drawerTable[i].getItemMeta(2).name.."-Yellow"] = False
-  messageSentTable[drawerTable[i].getItemMeta(2).name.."-Green"] = True
+  messageSentTable[drawerTable[i].getItemMeta(2).name.."-Red"] = false
+  messageSentTable[drawerTable[i].getItemMeta(2).name.."-Yellow"] = false
+  messageSentTable[drawerTable[i].getItemMeta(2).name.."-Green"] = true
 end
+
 
 message = ""
 while true do
@@ -27,28 +28,28 @@ while true do
         modem.transmit(2,2,"Storage-".. storageName .."-Red")
         print("red"..storageName)
         setItemFalse(storageName)
-        messageSentTable[message] = True
+        messageSentTable[message] = true
       end
 
     elseif drawerTable[i].getItemMeta(2).count < 32 then
-      message = drawerTable[i].getItemMeta(2).name .."-Red"
+      message = drawerTable[i].getItemMeta(2).name .."-Yellow"
       local storageName = drawerTable[i].getItemMeta(2).name
 
       if not messageSentTable[message] then
         modem.transmit(2,2,"Storage-".. storageName .."-Yellow")
         print("yellow"..storageName)
         setItemFalse(storageName)
-        messageSentTable[message] = True
+        messageSentTable[message] = true
       end
 
     else
-      message = drawerTable[i].getItemMeta(2).name .."-Red"
+      message = drawerTable[i].getItemMeta(2).name .."-Green"
       local storageName = drawerTable[i].getItemMeta(2).name
       if not messageSentTable[message] then
         modem.transmit(2,2,"Storage-".. storageName .."-Green")
         print("green"..storageName)
         setItemFalse(storageName)
-        messageSentTable[message] = True
+        messageSentTable[message] = true
       end
 
     end
