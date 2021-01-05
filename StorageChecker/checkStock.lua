@@ -26,7 +26,7 @@ while true do
       local storageName = drawerTable[i].getItemMeta(2).name
       if not messageSentTable[message] then
         modem.transmit(2,2,"Storage-".. storageName .."-Red")
-        print("red"..storageName)
+        print(message)
         setItemFalse(storageName)
         messageSentTable[message] = true
       end
@@ -37,7 +37,7 @@ while true do
 
       if not messageSentTable[message] then
         modem.transmit(2,2,"Storage-".. storageName .."-Yellow")
-        print("yellow"..storageName)
+        print(message)
         setItemFalse(storageName)
         messageSentTable[message] = true
       end
@@ -47,7 +47,7 @@ while true do
       local storageName = drawerTable[i].getItemMeta(2).name
       if not messageSentTable[message] then
         modem.transmit(2,2,"Storage-".. storageName .."-Green")
-        print("green"..storageName)
+        print(message)
         setItemFalse(storageName)
         messageSentTable[message] = true
       end
