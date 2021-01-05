@@ -22,30 +22,31 @@ while true do
   for i=1, #drawerTable do
     if drawerTable[i].getItemMeta(2).count < 5 then
       message = drawerTable[i].getItemMeta(2).name .."-Red"
-      
+      local storageName = drawerTable[i].getItemMeta(2).name
       if not messageSentTable[message] then
-        modem.transmit(2,2,"Storage-".. drawerTable[i].getItemMeta(2).name .."-Red")
-        print("red"..drawerTable[i].getItemMeta(2).name)
+        modem.transmit(2,2,"Storage-".. storageName .."-Red")
+        print("red"..storageName)
         setItemFalse(storageName)
         messageSentTable[message] = True
       end
 
     elseif drawerTable[i].getItemMeta(2).count < 32 then
       message = drawerTable[i].getItemMeta(2).name .."-Red"
+      local storageName = drawerTable[i].getItemMeta(2).name
 
       if not messageSentTable[message] then
-        modem.transmit(2,2,"Storage-".. drawerTable[i].getItemMeta(2).name .."-Yellow")
-        print("yellow"..drawerTable[i].getItemMeta(2).name)
+        modem.transmit(2,2,"Storage-".. storageName .."-Yellow")
+        print("yellow"..storageName)
         setItemFalse(storageName)
         messageSentTable[message] = True
       end
 
     else
       message = drawerTable[i].getItemMeta(2).name .."-Red"
-
+      local storageName = drawerTable[i].getItemMeta(2).name
       if not messageSentTable[message] then
-        modem.transmit(2,2,"Storage-".. drawerTable[i].getItemMeta(2).name .."-Green")
-        print("green"..drawerTable[i].getItemMeta(2).name)
+        modem.transmit(2,2,"Storage-".. storageName .."-Green")
+        print("green"..storageName)
         setItemFalse(storageName)
         messageSentTable[message] = True
       end
