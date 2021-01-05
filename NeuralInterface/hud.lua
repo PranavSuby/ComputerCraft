@@ -52,6 +52,7 @@ while true do
       armorTextBox.clear()
 
     elseif string.find(message, "Storage") then
+      print(message)
       local storageMessage = split(p4, "-") --Message in the form of "Storage-<itemId>-<color>" Example "Storage-minecraft:leaves-Yellow"
       local storageItemName = storageMessage[2]
       local storageColor = storageMessage[3]

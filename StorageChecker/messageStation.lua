@@ -33,17 +33,14 @@ while true do
 
   if channel == 3 then --Receiving Message from checkStock.lua
     if not messageSentTable[message] then
-      if storageColor ~= "Green" then
         modem.transmit(2,2,"Storage-".. drawerTable[drawerTableReverse[storageItemName]].getItemMeta(2).name ..storageColor)
         setItemFalse(storageName)
+        print("Channel 3")
         messageSentTable[message] = True
-      else
-        setItemFalse(storageName)
-        messageSentTable[message] = True
-      end
     end
 
   elseif channel == 1 then --Receiving Message from NeuralInterface/hud.lua
+    print("Channel 1")
     messageSentTable[message] = True
   end
 end
