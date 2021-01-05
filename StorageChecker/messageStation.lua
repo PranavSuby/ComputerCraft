@@ -1,12 +1,8 @@
 require "lib"
 require "storageLib"
+require "checkStock"
 
 local modem = peripheral.wrap(left)
-
-openModem(1, modem)
-openModem(3, modem)
-
-message = ""
 
 local messageSentTable = {}
 
@@ -25,7 +21,6 @@ for i=1, #drawerTable do
 end
 
 while true do
-  local event, peripheral_name, channel, replyChannel, message, distance = os.pullEvent("modem_message")
   local storageMessage = split(message, "-")
 
   local storageItemName = storageMessage[1]
