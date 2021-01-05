@@ -7,6 +7,7 @@ local modem =  peripheral.wrap(left)
 local reactorTextBox = canvas.addGroup({ 0, 0 })
 local armorTextBox = canvas.addGroup({0, 30})
 local storageGroup = canvas.addGroup({490,120})
+local storageTable = {}
 
 local itemBaseWidth = 16
 local itemBaseHeight = 16
@@ -32,7 +33,7 @@ openModem(2, modem)
 
 while true do
   local event, p1, p2, p3, p4, p5, p6 = os.pullEvent()
-  local storageTable = {}
+
   if event == "modem_message" then
     local message = p4
     if message == "Reactor Warning!!!" then
@@ -52,7 +53,7 @@ while true do
       armorTextBox.clear()
 
     elseif string.find(message, "Storage") then
-      print(message)
+      local reverseStorage = reverseIndex(storageTable)
       local storageMessage = split(p4, "-") --Message in the form of "Storage-<itemId>-<color>" Example "Storage-minecraft:leaves-Yellow"
       local storageItemName = storageMessage[2]
       local storageColor = storageMessage[3]
@@ -65,7 +66,7 @@ while true do
         storageTable[#storageTable+1] = {storageItemName, colorTable[storageColor]}
         modem.transmit(1,1,storageItemName.."-"..storageColor)
       else
-        storageTable.remove(reverseIndex(storageTable)[storageItemName])
+        table.remove(storageTable, reverseStorage()[storageItemName])
         modem.transmit(1,1,storageItemName.."-"..storageColor)
       end
 
@@ -74,9 +75,9 @@ while true do
       storageGroup.clear()
 
       for i=1, #storageTable do
-        local tempGroup = storageGroup.addGroup({-16 * math.floor((i-1)/sideNum),16*((i-1)%sideNum)})
-        drawCircle(10, 0, 0, colorTable[storageColor], tempGroup)
-        tempGroup.addItem({-8,-8}, storageItemName)
+        local tempGroup = storageGroup.addGroup({(-16 * math.floor((i-1)/sideNum))-8,(16*((i-1)%sideNum))-8})
+        drawCircle(8, 8, 8, colorTable[storageColor], tempGroup)
+        tempGroup.addItem({0,0}, storageItemName)
       end
 
     end
