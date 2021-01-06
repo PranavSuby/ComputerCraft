@@ -51,7 +51,7 @@ while true do
 
     elseif message == "Armor Good"  then
       armorTextBox.clear()
-      
+
     elseif string.find(message, "Storage") then
       local reverseStorage = reverseIndex(storageTable)
       local storageMessage = split(p4, "-") --Message in the form of "Storage-<itemId>-<color>" Example "Storage-minecraft:leaves-Yellow"
@@ -64,7 +64,9 @@ while true do
 
       for k,v in pairs(reverseStorage) do
         print(k)
-        print(v)
+        for j,w in pairs(v) do
+          print(j)
+          print(w)
       end
 
       if storageColor ~= "Green" then
