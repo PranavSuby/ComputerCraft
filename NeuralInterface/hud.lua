@@ -63,11 +63,14 @@ while true do
       }
 
       if storageColor ~= "Green" then
+
+        if storageColor == "Yellow" then table.remove(storageTable, reverseStorage[{storageItemName, "Red"}])
+        elseif storageColor == "Red" then table.remove(storageTable, reverseStorage[{storageItemName, "Yellow"}]) end
+
         storageTable[#storageTable+1] = {storageItemName, colorTable[storageColor]}
-        modem.transmit(1,1,storageItemName.."-"..storageColor)
       else
-        table.remove(storageTable, reverseStorage[{storageItemName, storageColor}])
-        modem.transmit(1,1,storageItemName.."-"..storageColor)
+        table.remove(storageTable, reverseStorage[{storageItemName, "Yellow"}])
+        table.remove(storageTable, reverseStorage[{storageItemName, "Red"}])
       end
 
       local sideNum = 3 --How many storage alerts per row/column
@@ -76,8 +79,8 @@ while true do
 
       for i=1, #storageTable do
         local tempGroup = storageGroup.addGroup({(-16 * math.floor((i-1)/sideNum))-8,(16*((i-1)%sideNum))-8})
-        drawCircle(8, 8, 8, colorTable[storageColor], tempGroup)
-        tempGroup.addItem({0,0}, storageItemName)
+        drawCircle(8, 8, 8, storageTable[i][2], tempGroup)
+        tempGroup.addItem({0,0}, storageTable[i][1])
       end
 
     end

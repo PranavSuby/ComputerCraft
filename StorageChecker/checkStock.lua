@@ -5,6 +5,20 @@ local modem = peripheral.wrap(left)
 
 local messageSentTable = {}
 
+local yieldTime
+
+local function yield()
+  if yieldTime then -- check if it already yielded
+    if os.clock() - yieldTime > 2 then -- if it were more than 2 seconds since the last yield
+      os.queueEvent("someFakeEvent") -- queue the event
+      os.pullEvent("someFakeEvent") -- pull it
+      yieldTime = nil -- reset the counter
+    end
+  else
+    yieldTime = os.clock() -- store the time
+  end
+end
+
 function setItemFalse(itemName) --This function will make the two values False in the messageSentTable corresponding to the same item
   messageSentTable[itemName.."-Red"] = False
   messageSentTable[itemName.."-Yellow"] = False
@@ -54,4 +68,5 @@ while true do
 
     end
   end
+  yield()
 end

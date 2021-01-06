@@ -12,14 +12,14 @@ function openModem(channel, modem)
 end
 
 function split (inputstr, sep)
-        if sep == nil then
-                sep = "%s"
-        end
-        local t={}
-        for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-                table.insert(t, str)
-        end
-        return t
+  if sep == nil then
+    sep = "%s"
+  end
+  local t={}
+  for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+    table.insert(t, str)
+  end
+  return t
 end
 
 function reverseIndex(t)
@@ -29,8 +29,6 @@ function reverseIndex(t)
   end
   return tReversed
 end
-
-
 
 
 --EVERYTHING BELOW IS FOR THE UPDATE FILES
