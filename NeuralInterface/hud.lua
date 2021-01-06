@@ -51,7 +51,7 @@ while true do
 
     elseif message == "Armor Good"  then
       armorTextBox.clear()
-
+      
     elseif string.find(message, "Storage") then
       local reverseStorage = reverseIndex(storageTable)
       local storageMessage = split(p4, "-") --Message in the form of "Storage-<itemId>-<color>" Example "Storage-minecraft:leaves-Yellow"
@@ -62,15 +62,22 @@ while true do
         ["Red"] = 0xD44646FF
       }
 
+      for k,v in pairs(reverseStorage) do
+        print(k)
+        print(v)
+      end
+
       if storageColor ~= "Green" then
 
-        if storageColor == "Yellow" then table.remove(storageTable, reverseStorage[{storageItemName, "Red"}])
-        elseif storageColor == "Red" then table.remove(storageTable, reverseStorage[{storageItemName, "Yellow"}]) end
+        if storageColor == "Yellow" and reverseStorage[{storageItemName, "Red"}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, "Red"}])
+        elseif storageColor == "Red" and reverseStorage[{storageItemName, "Yellow"}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, "Yellow"}]) end
 
         storageTable[#storageTable+1] = {storageItemName, colorTable[storageColor]}
       else
-        table.remove(storageTable, reverseStorage[{storageItemName, "Yellow"}])
-        table.remove(storageTable, reverseStorage[{storageItemName, "Red"}])
+        if reverseStorage[{storageItemName, "Yellow"}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, "Yellow"}])
+        elseif reverseStorage[{storageItemName, "Red"}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, "Red"}]) end
+
+
       end
 
       local sideNum = 3 --How many storage alerts per row/column
