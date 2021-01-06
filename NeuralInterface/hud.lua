@@ -65,13 +65,13 @@ while true do
 
       if storageColor ~= "Green" then
 
-        if storageColor == "Yellow" and reverseStorage[{storageItemName, "Red"}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, colorTable["Red"]}])
-        elseif storageColor == "Red" and reverseStorage[{storageItemName, "Yellow"}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, colorTable["Yellow"]}]) end
+        if storageColor == "Yellow" and reverseStorage[{storageItemName, colorTable["Red"]}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, colorTable["Red"]}])
+        elseif storageColor == "Red" and reverseStorage[{storageItemName, colorTable["Yellow"]}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, colorTable["Yellow"]}]) end
 
         storageTable[#storageTable+1] = {storageItemName, colorTable[storageColor]}
       else
-        if reverseStorage[{storageItemName, colorTable["Yellow"]}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, "Yellow"}])
-        elseif reverseStorage[{storageItemName, colorTable["Red"]}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, "Red"}]) end
+        if reverseStorage[{storageItemName, colorTable["Yellow"]}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, colorTable["Yellow"]}])
+        elseif reverseStorage[{storageItemName, colorTable["Red"]}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, colorTable["Red"]}]) end
 
 
       end
