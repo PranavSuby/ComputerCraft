@@ -62,12 +62,6 @@ while true do
         ["Red"] = 0xD44646FF
       }
 
-      for k,v in pairs(reverseStorage) do
-        print(k)
-        for j,w in pairs(v) do
-          print(j)
-          print(w)
-      end
 
       if storageColor ~= "Green" then
 
@@ -80,6 +74,16 @@ while true do
         elseif reverseStorage[{storageItemName, "Red"}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, "Red"}]) end
 
 
+      end
+
+      for k,v in pairs(reverseStorage) do
+        print(v)
+        for j,w in pairs(k) do
+          print(j)
+          print(w)
+        end
+        print(reverseStorage[v])
+        print(reverseStorage[k])
       end
 
       local sideNum = 3 --How many storage alerts per row/column
