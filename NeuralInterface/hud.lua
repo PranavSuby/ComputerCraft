@@ -53,7 +53,15 @@ while true do
       armorTextBox.clear()
 
     elseif string.find(message, "Storage") then
-      local reverseStorage = reverseIndex(storageTable)
+      local reverseStorage = {}
+
+      local iterNum = 1
+
+      for k,v in pairs(storageTable) do
+        reverseStorage[k] = iterNum
+        iterNum = iterNum + 1
+      end
+
       local storageMessage = split(p4, "-") --Message in the form of "Storage-<itemId>-<color>" Example "Storage-minecraft:leaves-Yellow"
       local storageItemName = storageMessage[2]
       local storageColor = storageMessage[3]
@@ -64,36 +72,23 @@ while true do
 
 
       if storageColor ~= "Green" then
-
-        if storageColor == "Yellow" and reverseStorage[{storageItemName, colorTable["Red"]}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, colorTable["Red"]}])
-        elseif storageColor == "Red" and reverseStorage[{storageItemName, colorTable["Yellow"]}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, colorTable["Yellow"]}]) end
-
-        storageTable[#storageTable+1] = {storageItemName, colorTable[storageColor]}
+        storageTable[storageItemName] = colorTable[storageColor]
       else
-        if reverseStorage[{storageItemName, colorTable["Yellow"]}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, colorTable["Yellow"]}])
-        elseif reverseStorage[{storageItemName, colorTable["Red"]}] ~= nil then table.remove(storageTable, reverseStorage[{storageItemName, colorTable["Red"]}]) end
-
-
-      end
-
-      for k,v in pairs(reverseStorage) do
-        print(v)
-        for j,w in pairs(k) do
-          print(j)
-          print(w)
-        end
-        print(reverseStorage[v])
-        print(reverseStorage[k])
+        storageTable[storageItemName] = nil
       end
 
       local sideNum = 3 --How many storage alerts per row/column
 
       storageGroup.clear()
 
-      for i=1, #storageTable do
-        local tempGroup = storageGroup.addGroup({(-16 * math.floor((i-1)/sideNum))-8,(16*((i-1)%sideNum))-8})
-        drawCircle(8, 8, 8, storageTable[i][2], tempGroup)
-        tempGroup.addItem({0,0}, storageTable[i][1])
+      iterNum = 1
+      for k,v in pairs(storageTable) do
+        if storageTable[k] ~= nil then
+          local tempGroup = storageGroup.addGroup({(-24 * math.floor((iterNum-1)/sideNum))-8,(24*((iterNum-1)%sideNum))-8})
+          drawCircle(12, 8, 8, v, tempGroup)
+          tempGroup.addItem({0,0}, k)
+          iterNum = iterNum + 1
+        end
       end
 
     end
