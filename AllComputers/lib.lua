@@ -30,6 +30,11 @@ function reverseIndex(t)
   return tReversed
 end
 
+function printKeys(t)
+  for k,v in pairs(t) do
+    print(tostring(k)..":"..tostring(v))
+  end
+end
 
 --EVERYTHING BELOW IS FOR THE UPDATE FILES
 files = {

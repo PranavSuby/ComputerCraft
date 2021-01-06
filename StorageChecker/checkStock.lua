@@ -25,48 +25,60 @@ function setItemFalse(itemName) --This function will make the two values False i
   messageSentTable[itemName.."-Green"] = False
 end
 
-for i=1, #drawerTable do
-  messageSentTable[drawerTable[i].getItemMeta(2).name.."-Red"] = false
-  messageSentTable[drawerTable[i].getItemMeta(2).name.."-Yellow"] = false
-  messageSentTable[drawerTable[i].getItemMeta(2).name.."-Green"] = true
+function doesExist(iterNum)
+  return drawerTable[iterNum].getItemMeta(2).count
 end
 
+for i=1, #drawerTable do
+
+  messageSentTable[drawerTableKeys[i].."-Red"] = false
+  messageSentTable[drawerTableKeys[i].."-Yellow"] = false
+  messageSentTable[drawerTableKeys[i].."-Green"] = true
+end
 
 message = ""
 while true do
   for i=1, #drawerTable do
-    if drawerTable[i].getItemMeta(2).count < 5 then
-      message = drawerTable[i].getItemMeta(2).name .."-Red"
-      local storageName = drawerTable[i].getItemMeta(2).name
-      if not messageSentTable[message] then
-        modem.transmit(2,2,"Storage-".. storageName .."-Red")
-        print(message)
-        setItemFalse(storageName)
-        messageSentTable[message] = true
-      end
+    local itemName = drawerTableKeys[i]
+    local itemCount = 0
 
-    elseif drawerTable[i].getItemMeta(2).count < 32 then
-      message = drawerTable[i].getItemMeta(2).name .."-Yellow"
-      local storageName = drawerTable[i].getItemMeta(2).name
+    local status, res = pcall(doesExist,i)
 
-      if not messageSentTable[message] then
-        modem.transmit(2,2,"Storage-".. storageName .."-Yellow")
-        print(message)
-        setItemFalse(storageName)
-        messageSentTable[message] = true
-      end
-
-    else
-      message = drawerTable[i].getItemMeta(2).name .."-Green"
-      local storageName = drawerTable[i].getItemMeta(2).name
-      if not messageSentTable[message] then
-        modem.transmit(2,2,"Storage-".. storageName .."-Green")
-        print(message)
-        setItemFalse(storageName)
-        messageSentTable[message] = true
-      end
-
+    if status then
+      itemCount = res
     end
+
+    if itemCount < 5 then
+      message = itemName .."-Red"
+
+      if not messageSentTable[message] then
+        print(message)
+        modem.transmit(2,2,"Storage-".. itemName .."-Red")
+        setItemFalse(itemName)
+        messageSentTable[message] = true
+      end
+
+    elseif itemCount < 32 then
+      message = itemName .."-Yellow"
+
+      if not messageSentTable[message] then
+        print(message)
+        modem.transmit(2,2,"Storage-".. itemName .."-Yellow")
+        setItemFalse(itemName)
+        messageSentTable[message] = true
+      end
+
+    elseif itemCount >= 32 then
+      message = itemName .."-Green"
+
+      if not messageSentTable[message] then
+        print(message)
+        modem.transmit(2,2,"Storage-".. itemName .."-Green")
+        setItemFalse(itemName)
+        messageSentTable[message] = true
+      end
+    end
+
   end
   yield()
 end
